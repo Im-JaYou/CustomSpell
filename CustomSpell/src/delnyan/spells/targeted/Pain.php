@@ -2,18 +2,19 @@
 
 namespace delnyan\spells\targeted;
 
+use delnyan\spells\SpellInterface;
 use pocketmine\entity\Entity;
 use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\Player;
 
-class Pain extends TargetedSpellBase {
+class Pain extends TargetedBase implements SpellInterface {
 
     private $damage = 0;
     private $ignoreArmor = false;
     private $cause = 0;
 
-    public function __construct(Player $caster, Entity $target, float $damage, bool $ignoreArmor = false, int $cause = EntityDamageEvent::CAUSE_VOID) {
-        parent::__construct($caster, $target);
+    public function __construct(Entity $target, float $damage, bool $ignoreArmor = false, int $cause = EntityDamageEvent::CAUSE_VOID) {
+        parent::__construct($target);
         $this-> setDamage($damage);
         $this-> setIgnoreArmor($ignoreArmor);
         $this-> setCause($cause);

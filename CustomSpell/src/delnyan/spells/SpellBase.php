@@ -26,8 +26,10 @@ abstract class SpellBase {
     private $cooldown = 0;
     private $castTime = 0;
     private $castType = 0;
+    private $spell = null;
 
-    public function __construct(Player $caster, string $name = '', string $description = '', float $cost = 0, int $costType = 0, float $cooldown = 0, int $castType = 0, $costItem = null) {
+    public function __construct(SpellInterface $spell, Player $caster, string $name = '', string $description = '', float $cost = 0, int $costType = 0, float $cooldown = 0, int $castType = 0, $costItem = null) {
+        $this-> setSpell($spell);
         $this-> setCaster($caster);
         $this-> setName($name);
         $this-> setDescription($description);
@@ -57,7 +59,7 @@ abstract class SpellBase {
 
     public function cast() {
         if($this-> getCaster()-> isOp())
-            $this-> work();
+            $this-> getSpell()-> work();
         else {
             if($this-> checkCooldown()) {
                 if($this-> isEnough()) {
@@ -80,7 +82,14 @@ abstract class SpellBase {
         }
     }
 
-    abstract public function work();
+
+    public function setSpell($spell) {
+        $this-> spell = $spell;
+    }
+
+    public function getSpell() {
+        return $this-> spell;
+    }
 
 
     public function setCaster(Player $player) {

@@ -1,0 +1,7 @@
+name: CustomSpell
+main: nyannyan\Loader
+author: nyan
+version: '0.1b'
+api:
+- 4.0.0
+- 3.0.0
